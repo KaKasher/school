@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ex1"></div>
+    <div id="ex2"></div>
+    <div id="ex3"></div>
+    <script>
+        const liczby = [2, 5, 7, 10, 34, 16, 879, 1];
+        var ex1 = document.getElementById('ex1');
+
+        var arrEx1 = [];
+        liczby.forEach(element => {
+            if (element % 2 == 0) {
+                arrEx1.push(element)
+            }
+        });
+
+        ex1.innerHTML = '[' + arrEx1 +  ']</br></br>';
+
+        const students = ["John", "Bill", "Emma", "Stella", "Rob"];
+        var ex2 = document.getElementById('ex2');
+
+        var randName = students[Math.floor(Math.random() * students.length)];
+
+        ex2.innerHTML += '[' + students + ']</br>';
+        ex2.innerHTML += randName;
+
+        students.push('Kacper', 'Oskar', 'Kuba', 'Dawid', 'Eliasz');
+        randName = students[Math.floor(Math.random() * students.length)];
+        
+        ex2.innerHTML += '</br>[' + students + ']</br>';
+        ex2.innerHTML += randName + '</br></br>';
+
+        var ex3 = document.getElementById('ex3');
+        var names = new Array();
+
+        names[0] = ['Jan', 'Kowalski'];
+        names[1] = ['John', 'Nowak'];
+        names[2] = ['Kacper', 'Greg'];
+        names[3] = ['Adam', 'Małysz'];
+        names[4] = ['Carl', 'Johnson'];
+        names[5] = ['Bob', 'Nowak'];
+
+        names.forEach(element => {
+            if (element[1] == 'Nowak') {
+                ex3.innerHTML += element[0] + ' ' + element[1] + ' '
+            }
+        });
+
+        ex3.innerHTML += '</br>'
+
+        for(i = 0; i < names.length; i++) {
+            if (i % 2 == 0) {
+                ex3.innerHTML += names[i][0] + ' ' + names[i][1] + ' ';
+            }
+        }
+
+
+    </script>
+    
+    
+</body>
+</html>
