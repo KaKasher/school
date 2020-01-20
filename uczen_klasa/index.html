@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="uczen.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="screen"></div>
+    <div id="clock"></div>
+    <script>
+    // funkcja do sortowania po wieku w klasie Uczen
+    function compareAge(a, b) {
+        if (a.age > b.age) return 1;
+        if (a.age < b.age) return -1;
+        return 0;
+    }
+
+    var uczen_1 = new Uczen("Gregorowicz", "Kacper", 18);
+    var uczen_2 = new Uczen("Johnson", "Carl", 27);
+    var uczen_3 = new Uczen("Budowniczy", "Bob", 23);
+
+    var uczniowie = new Array(uczen_1, uczen_2, uczen_3);
+
+    // posortowanie tablicy po wieku
+    uczniowie.sort(compareAge);
+
+    // wypisanie imion i sredniej
+    e = document.getElementById("screen");
+    var avg_age = 0;
+    for (i = 0; i < 3; i++) {
+        e.innerHTML += (i+1) + ". " + uczniowie[i].lastname + " " + uczniowie[i].firstname + " " + uczniowie[i].age + "</br>";
+        avg_age += uczniowie[i].age
+    }
+
+    avg_age = avg_age/uczniowie.length;
+
+    e.innerHTML += "</br> Średnia wieku: " + avg_age;
+    
+    function clock() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('clock').innerHTML =
+        h + ":" + m + ":" + s;
+        var t = setTimeout(clock, 500);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};
+        return i;
+    }
+    clock();
+    </script>
+    
+</body>
+</html>
