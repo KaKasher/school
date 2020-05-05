@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function isPeselValid(pesel) {
+
+        var controlSum = 9*parseInt(pesel[0]) + 7*parseInt(pesel[1]) + 3*parseInt(pesel[2]) + 1*parseInt(pesel[3]) + 9*parseInt(pesel[4]) + 7*parseInt(pesel[5]) + 3*parseInt(pesel[6]) + 1*parseInt(pesel[7]) + 9*parseInt(pesel[8]) + 7*parseInt(pesel[9]);
+
+        if (controlSum % 10 != parseInt(pesel[10])) {
+            return false;
+        }
+
+        }
+
+        function calculateDecade(decadeCode) {
+            if (decadeCode == 0) {return 19;}
+            else if (decadeCode == 20) {return 20;}
+            else if (decadeCode == 40) {return 21;}
+            else if (decadeCode == 60) {return 22;}
+            else if (decadeCode == 80) {return 18;}
+        }
+
+        function calculateDate(pesel) {
+            var day = pesel.slice(4, 6);
+            var month = parseInt(pesel.slice(2, 4));
+            var decadeCode = 0;
+
+            while(month < 1 || month > 12) {
+                month -= 20;
+                decadeCode += 20;
+            }
+
+            var year = String(calculateDecade(decadeCode)) + pesel.slice(0, 2);
+
+            var fullDate = day + '.' + String(month) + '.' + year;
+
+            return fullDate;
+        }
+
+        function calculateGender(pesel) {
+            if (parseInt(pesel[9]) % 2 == 0) {
+                return "Kobieta";
+            } else {
+                return "Mężczyzna";
+            }
+        }
+
+        function calcPesel() {
+            var pesel = document.getElementById('pesel').value;
+            console.log(pesel);
+
+            if (isPeselValid(pesel) == false) {
+                alert("Pesel jest niepoprawny!");
+                return 0;
+            }
+
+            var date = calculateDate(pesel);
+            var gender = calculateGender(pesel);
+
+            document.getElementById('data').innerHTML = "Data urodzenia: " + date;
+            document.getElementById('gender').innerHTML = "Plec: " + gender;
+
+        }
+
+        function validateEmail() { 
+        var email = document.getElementById('email').value;
+
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var r = re.test(String(email).toLowerCase());
+        
+        if (r == true) {document.getElementById('evalEmail').innerHTML = "email poprawny";}
+        else {document.getElementById('evalEmail').innerHTML = "email niepoprawny";}
+
+        }
+
+    </script>
+</head>
+<body>
+    
+    <p>Wpisz pesel:</p>
+    <input type="text" id="pesel">
+    <button onclick="calcPesel()">Sprawdź</button>
+    <div id="data"></div>
+    <div id="gender"></div>
+    <p>Wpisz email:</p>
+    <input type="email" name="email" id="email">
+    <button onclick="validateEmail()">Sprawdź</button>
+    <div id="evalEmail"></div>
+</body>
+</html>
