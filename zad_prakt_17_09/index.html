@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <div id='container'>
+        <div id='banner'>
+            <center><h1>Cała Prawda o Tobie!</h1>
+            <img src='clock.png'></center>
+        </div>
+        <div id='content'>
+            <p>Podaj date urodzenia</p>
+            <input onchange='timelived()' type='date' id='date'>
+            
+            <p id='date-now'>Dzisiaj jest:</p>
+            <p id='passed'>Żyjesz już:</p>
+            <script src="moment.min.js" type='text/javascript'></script>
+            <script src="moment-precise-range.js"></script>
+            <script>
+                var today = new Date();
+
+                var today_date = today.getDate() + '/' + (today.getMonth()+1) + '/' + today.getFullYear();
+
+                document.getElementById('date-now').innerHTML = 'Dzisiaj jest: ' + today_date;
+
+                function timelived() {
+                    var birth_date = document.getElementById('date').value;
+                    var starts = moment(birth_date);
+                    var ends = moment();
+
+                    var duration = moment.duration(ends.diff(starts));
+
+                    var diffHuman = moment.preciseDiff(starts, ends);
+                    var diffHuman = diffHuman.replace('days', 'dni');
+                    var diffHuman = diffHuman.replace('months', 'miesiecy');
+                    var diffHuman = diffHuman.replace('years', 'lata');
+                    var diffHuman = diffHuman.replace('hours', 'godzin');
+                    var diffHuman = diffHuman.replace('minutes', 'minut');
+                    var diffHuman = diffHuman.replace('seconds', 'sekund');
+                    var diffHuman = diffHuman.replace('day', 'dzien');
+                    var diffHuman = diffHuman.replace('month', 'miesiac');
+                    var diffHuman = diffHuman.replace('year', 'rok');
+
+                    document.getElementById('passed').innerHTML = 'Żyjesz już: <br/>' + diffHuman;
+                }
+            </script>
+        </div>
+        <div id='footer'>
+            <p>Autor: Kacper Gregorowicz 4IT</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#fade").click(function(){
+                $("#div1").fadeToggle();
+                $("#div2").fadeToggle("slow");
+                $("#div3").fadeToggle(1500);
+            });
+
+            $("#flip").click(function(){
+                $("#panel").slideToggle("slow");
+             });
+            
+            $("#colorChange").click(function() { 
+                var body = $('body');
+                var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple'];
+                var currentIndex = 0;
+                setInterval(function () {
+                    body.css({
+                        backgroundColor: colors[currentIndex]
+                    });
+
+                    if (!colors[currentIndex]) {
+                        currentIndex = 0;
+                    } else {
+                        currentIndex++;
+                    }
+                }, 100);
+            });
+        }); 
+
+        
+    </script>
+
+    <style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: yellowgreen;
+        border: solid 1px darkolivegreen;
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+
+    body {
+        transition: 200ms ease;
+    }
+
+    .section {
+        width: 20%;
+        float: left;
+        margin-left: 100px;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="section">
+
+        <button id="fade">Pokaż / Schowaj</button><br><br>
+
+        <div id="div1" style="width:80px;height:80px;background-color: whitesmoke;"></div>
+        <br>
+        <div id="div2" style="width:80px;height:80px;background-color:gray;"></div>
+        <br>
+        <div id="div3" style="width:80px;height:80px;background-color:black;"></div>
+
+    </div>
+    <div class="section">
+
+        <div id="flip">Kliknij aby wysunąć</div>
+        <div id="panel">Fajna animacja</div>
+
+    </div>
+    <div class="section">
+        <button id="colorChange">Nie wciskać!!!!</button>
+    </div>
+
+</body>
+</html>
